@@ -1,0 +1,22 @@
+object frmTurtle: TfrmTurtle
+  Left = 294
+  Height = 480
+  Top = 120
+  Width = 640
+  Caption = 'Turtle Graphics'
+  ClientHeight = 480
+  ClientWidth = 640
+  LCLVersion = '1.8.0.5'
+  object BGRAGraphicControl1: TBGRAGraphicControl
+    Left = 0
+    Height = 480
+    Top = 0
+    Width = 640
+    Align = alClient
+    OnRedraw = BGRAGraphicControl1Redraw
+    Color = clWhite
+    ColorOpacity = 128
+    Alignment = taCenter
+    Caption = 'BGRAGraphicControl1'
+  end
+end
