@@ -1,22 +1,33 @@
 object frmTurtle: TfrmTurtle
-  Left = 294
+  Left = 428
   Height = 480
-  Top = 120
+  Top = 155
   Width = 640
   Caption = 'Turtle Graphics'
   ClientHeight = 480
   ClientWidth = 640
-  LCLVersion = '1.8.0.5'
-  object BGRAGraphicControl1: TBGRAGraphicControl
+  DesignTimePPI = 120
+  OnCreate = FormCreate
+  Position = poScreenCenter
+  LCLVersion = '1.9.0.0'
+  object BGRAGraphicControl1: TBGRAVirtualScreen
     Left = 0
     Height = 480
     Top = 0
     Width = 640
-    Align = alClient
     OnRedraw = BGRAGraphicControl1Redraw
-    Color = clWhite
-    ColorOpacity = 128
+    Align = alClient
     Alignment = taCenter
-    Caption = 'BGRAGraphicControl1'
+    Color = clWhite
+    ParentColor = False
+    TabOrder = 0
+    OnClick = BGRAGraphicControl1Click
+  end
+  object Timer1: TTimer
+    Enabled = False
+    Interval = 15
+    OnTimer = Timer1Timer
+    Left = 343
+    Top = 171
   end
 end

@@ -5,18 +5,24 @@ unit umain;
 interface
 
 uses
-  Classes, SysUtils, FileUtil, Forms, Controls, Graphics, Dialogs,
-  BGRAGraphicControl, BGRABitmap, BGRABitmapTypes;
+  Classes, SysUtils, FileUtil, Forms, Controls, Graphics, Dialogs, ExtCtrls,
+  BGRAGraphicControl, BGRAVirtualScreen, BGRABitmap, BGRABitmapTypes;
 
 type
 
   { TfrmTurtle }
 
   TfrmTurtle = class(TForm)
-    BGRAGraphicControl1: TBGRAGraphicControl;
+    BGRAGraphicControl1: TBGRAVirtualScreen;
+    Timer1: TTimer;
+    procedure BGRAGraphicControl1Click(Sender: TObject);
     procedure BGRAGraphicControl1Redraw(Sender: TObject; Bitmap: TBGRABitmap);
+    procedure FormCreate(Sender: TObject);
+    procedure Timer1Timer(Sender: TObject);
   private
-    procedure move(Bitmap: TBGRABitmap; distance: integer);
+    centerX, centerY: Integer;
+    gAngle: single;
+    procedure move(Bitmap: TBGRABitmap; distance: single);
     procedure rotate(Bitmap: TBGRABitmap; angle: single);
     procedure translate(Bitmap: TBGRABitmap; x: single; y: single);
     procedure reset(Bitmap: TBGRABitmap);
@@ -38,42 +44,78 @@ procedure TfrmTurtle.BGRAGraphicControl1Redraw(Sender: TObject; Bitmap: TBGRABit
 var
   i, j: integer;
 begin
-  Bitmap.Fill(BGRAWhite);
-
+  // spiraling
   reset(Bitmap);
-  set_color(Bitmap, 0, 0, 255, 255);
+  translate(Bitmap, centerX, centerY);
+  for i := 1 to 400 do
+  begin
+    move(Bitmap, i);
+    rotate(Bitmap, gAngle);
+  end;
+
+  {// square
+  reset(Bitmap);
+  set_color(Bitmap, 255, 128, 64, 255);
+
+  translate(Bitmap, (Bitmap.Width div 2) - 25, (Bitmap.Height div 2) - 25);
+  for i := 1 to 4 do
+  begin
+    move(Bitmap, 50);
+    rotate(Bitmap, gAngle);
+  end;
 
   // 5 points star
+  reset(Bitmap);
+  set_color(Bitmap, 0, 128, 192, 255);
+
   translate(Bitmap, (Bitmap.Width div 2) - 100, (Bitmap.Height div 2) - 50);
   for i := 1 to 5 do
   begin
     move(Bitmap, 200);
-    rotate(Bitmap, 144);
+    rotate(Bitmap, gAngle);
   end;
 
-  reset(Bitmap);
-  set_color(Bitmap, 0, 255, 0, 255);
-
   // 9 triangles
+  reset(Bitmap);
+  set_color(Bitmap, 255, 0, 0, 255);
+
   translate(Bitmap, (Bitmap.Width div 2) - 50, (Bitmap.Height div 2) - 120);
   for i := 1 to 3 do
   begin
     move(Bitmap, 200);
     for j := 1 to 2 do
     begin
-      rotate(Bitmap, 120);
+      rotate(Bitmap, gAngle);
       move(Bitmap, 100);
     end;
     for j := 1 to 2 do
     begin
-      rotate(Bitmap, -120);
+      rotate(Bitmap, -gAngle);
       move(Bitmap, 100);
     end;
     rotate(Bitmap, 120);
-  end;
+  end;}
 end;
 
-procedure TfrmTurtle.move(Bitmap: TBGRABitmap; distance: integer);
+procedure TfrmTurtle.BGRAGraphicControl1Click(Sender: TObject);
+begin
+  Timer1.Enabled:=True;
+end;
+
+procedure TfrmTurtle.FormCreate(Sender: TObject);
+begin
+  gAngle := 0;
+  centerX := Width div 2;
+  centerY := Height div 2;
+end;
+
+procedure TfrmTurtle.Timer1Timer(Sender: TObject);
+begin
+  gAngle := gAngle + 0.1;
+  BGRAGraphicControl1.DiscardBitmap;
+end;
+
+procedure TfrmTurtle.move(Bitmap: TBGRABitmap; distance: single);
 begin
   Bitmap.Canvas2D.beginPath;
   Bitmap.Canvas2D.moveTo(0, 0);
