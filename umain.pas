@@ -47,7 +47,7 @@ begin
   // spiraling
   reset(Bitmap);
   translate(Bitmap, centerX, centerY);
-  for i := 1 to 400 do
+  for i := 1 to 490 do
   begin
     move(Bitmap, i);
     rotate(Bitmap, gAngle);
@@ -112,7 +112,10 @@ end;
 procedure TfrmTurtle.Timer1Timer(Sender: TObject);
 begin
   gAngle := gAngle + 0.1;
+  Caption := FloatToStr(gAngle);
   BGRAGraphicControl1.DiscardBitmap;
+  if (gAngle >= 360) then
+    Timer1.Enabled:=False;
 end;
 
 procedure TfrmTurtle.move(Bitmap: TBGRABitmap; distance: single);

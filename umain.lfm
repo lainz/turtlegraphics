@@ -1,20 +1,20 @@
 object frmTurtle: TfrmTurtle
   Left = 428
-  Height = 480
+  Height = 720
   Top = 155
-  Width = 640
+  Width = 1280
   Caption = 'Turtle Graphics'
-  ClientHeight = 480
-  ClientWidth = 640
+  ClientHeight = 720
+  ClientWidth = 1280
   DesignTimePPI = 120
   OnCreate = FormCreate
   Position = poScreenCenter
   LCLVersion = '1.9.0.0'
   object BGRAGraphicControl1: TBGRAVirtualScreen
     Left = 0
-    Height = 480
+    Height = 720
     Top = 0
-    Width = 640
+    Width = 1280
     OnRedraw = BGRAGraphicControl1Redraw
     Align = alClient
     Alignment = taCenter
