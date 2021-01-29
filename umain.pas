@@ -39,16 +39,17 @@ var
   i, j: integer;
 begin
   // spiraling
-  {Bitmap.ResetTurtle;
+
+  Bitmap.ResetTurtle;
   Bitmap.TranslateTurtle(centerX, centerY);
   for i := 1 to 490 do
   begin
     Bitmap.MoveTurtle(i);
     Bitmap.RotateTurtle(gAngle);
-  end;}
+  end;
 
   // drawing 1
-  Bitmap.ResetTurtle;
+  //Bitmap.ResetTurtle;
   Bitmap.ColorTurtle(255, 128, 64, 255);
 
   Bitmap.TranslateTurtle((Bitmap.Width div 2) - 25, (Bitmap.Height div 2) - 25);
@@ -59,7 +60,7 @@ begin
   end;
 
   // drawing 2
-  Bitmap.ResetTurtle;
+  //Bitmap.ResetTurtle;
   Bitmap.ColorTurtle(0, 128, 192, 255);
 
   Bitmap.TranslateTurtle((Bitmap.Width div 2) - 100, (Bitmap.Height div 2) - 50);
@@ -70,7 +71,7 @@ begin
   end;
 
   // drawing 3
-  Bitmap.ResetTurtle;
+  //Bitmap.ResetTurtle;
   Bitmap.ColorTurtle(255, 0, 0, 255);
 
   Bitmap.TranslateTurtle((Bitmap.Width div 2) - 50, (Bitmap.Height div 2) - 120);
